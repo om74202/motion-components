@@ -1,10 +1,10 @@
 "use client"
-import { StateFullButton } from "@/components/StateFullButton";
+import { HoverBorderGradient } from "@/components/Buttons/HoverBorderGradient";
 
 export default function Home() {
   return (
-    <div className="bg-black flex items-center justify-center h-screen">
-     <StateFullButton />
+    <div className="bg-gray-900 flex items-center justify-center h-screen">
+     <HoverBorderGradient />
     </div>
   );
 }
