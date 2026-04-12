@@ -1,36 +1,98 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Motion Components
 
-## Getting Started
+`motion-components` is a small component repo for interactive UI pieces built with Next.js, React, Tailwind CSS, and Motion-based animation APIs. The goal of the repo is to collect reusable animated components that feel polished, responsive, and easy to lift into other projects.
 
-First, run the development server:
+## What This Repo Contains
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+The repo is organized around reusable UI patterns rather than a single product UI.
+
+- Animated buttons
+- Micro-interactions
+- Loading states
+- Success-state feedback
+- Border and hover effects
+
+Current examples include:
+
+- `HoverBorderGradient`
+  A button with a moving border strip, glow, and a hover-triggered enhanced border effect.
+- `StateFullButton`
+  A state-driven action button that transitions between idle, loading, and success.
+- `CircularLoading`
+  A lightweight spinning loader.
+- `SuccessTick`
+  A success icon with animated SVG drawing.
+
+## Stack
+
+- Next.js `16`
+- React `19`
+- TypeScript
+- Tailwind CSS `4`
+- Motion / Framer Motion style animation APIs
+- Lucide icons
+
+## Project Structure
+
+```text
+app/
+  page.tsx
+  layout.tsx
+components/
+  Buttons/
+    HoverBorderGradient.tsx
+    StateFullButton.tsx
+loaders/
+  circularLoading.tsx
+  sucessTick.tsx
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Running Locally
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Install dependencies and start the dev server:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm install
+npm run dev
+```
 
-## Learn More
+Then open `http://localhost:3000`.
 
-To learn more about Next.js, take a look at the following resources:
+## Development Notes
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- Components are written to be demoed quickly inside the App Router.
+- Interactive components should be client components when they rely on effects, refs, animation loops, or browser APIs.
+- Tailwind is used for layout and visual styling, while animation logic is handled in Motion and, where needed, `canvas`.
+- The repo is a component playground, so components can be iterated independently and later extracted into a design system or package.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Component Direction
 
-## Deploy on Vercel
+This repo is intended to grow into a collection of motion-focused UI building blocks such as:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- Buttons
+- Loaders
+- Cards
+- Toggles
+- Inputs
+- Status indicators
+- Hover effects
+- Transition patterns
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Usage
+
+Import components directly from their files while the repo is in active development:
+
+```tsx
+import { HoverBorderGradient } from "@/components/Buttons/HoverBorderGradient";
+import { StateFullButton } from "@/components/Buttons/StateFullButton";
+```
+
+## Goal
+
+The focus is not just animation for its own sake. The aim is to build components that have:
+
+- Clear interaction feedback
+- Good visual rhythm
+- Reusable structure
+- Clean implementation in TypeScript
+- Easy adaptation for real product interfaces
