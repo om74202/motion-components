@@ -1,0 +1,102 @@
+Professional dark gradients
+1. Dark slate / black
+className="bg-gradient-to-b from-slate-800 via-slate-900 to-black"
+
+Good for dashboards, admin panels, developer tools.
+
+2. Deep blue tech look
+className="bg-gradient-to-b from-blue-900 via-slate-900 to-black"
+
+Good for SaaS, AI apps, login pages.
+
+3. Premium navy
+className="bg-gradient-to-b from-slate-900 via-blue-950 to-black"
+
+Very professional and serious.
+
+4. Dark purple AI style
+className="bg-gradient-to-b from-violet-950 via-slate-950 to-black"
+
+Good for AI tools, modern landing pages.
+
+5. Black with emerald tint
+className="bg-gradient-to-b from-emerald-950 via-slate-950 to-black"
+
+Good for finance, analytics, productivity apps.
+
+Clean light gradients
+6. Soft blue white
+className="bg-gradient-to-b from-blue-50 via-white to-slate-100"
+
+Good for clean landing pages and forms.
+
+7. Soft indigo SaaS
+className="bg-gradient-to-b from-indigo-50 via-white to-slate-100"
+
+Good for SaaS websites.
+
+8. Very clean neutral
+className="bg-gradient-to-b from-slate-50 via-white to-slate-100"
+
+Good for business apps and dashboards.
+
+9. Soft emerald
+className="bg-gradient-to-b from-emerald-50 via-white to-slate-100"
+
+Good for health, finance, productivity.
+
+10. Warm friendly
+className="bg-gradient-to-b from-orange-50 via-white to-yellow-50"
+
+Good for friendly landing pages.
+
+Modern colorful gradients
+11. Blue to purple
+className="bg-gradient-to-b from-blue-600 via-indigo-700 to-purple-900"
+
+Good for hero sections.
+
+12. Purple to pink
+className="bg-gradient-to-b from-purple-700 via-fuchsia-700 to-pink-700"
+
+Good for creative websites.
+
+13. Cyan to blue
+className="bg-gradient-to-b from-cyan-500 via-blue-600 to-indigo-800"
+
+Good for tech/product pages.
+
+14. Emerald to teal
+className="bg-gradient-to-b from-emerald-500 via-teal-600 to-cyan-700"
+
+Good for fresh, modern product pages.
+
+15. Orange to rose
+className="bg-gradient-to-b from-orange-500 via-rose-500 to-pink-600"
+
+Good for bold marketing pages.
+
+Subtle dashboard gradients
+
+For admin/dashboard UI, use subtle combinations like these:
+
+className="bg-gradient-to-b from-slate-50 via-white to-slate-100"
+className="bg-gradient-to-b from-gray-50 via-white to-gray-100"
+className="bg-gradient-to-b from-slate-900 via-slate-950 to-black"
+className="bg-gradient-to-b from-blue-950 via-slate-950 to-black"
+My recommended combinations for your use
+
+Since you mostly build full-stack dashboards/admin UIs, I would use these most often:
+
+Light dashboard
+className="min-h-screen bg-gradient-to-b from-slate-50 via-white to-slate-100 text-slate-900"
+Dark dashboard
+className="min-h-screen bg-gradient-to-b from-slate-900 via-slate-950 to-black text-white"
+Modern AI/developer page
+className="min-h-screen bg-gradient-to-b from-blue-950 via-slate-950 to-black text-white"
+Premium login page
+className="min-h-screen bg-gradient-to-b from-violet-950 via-slate-950 to-black text-white"
+Clean SaaS landing page
+className="min-h-screen bg-gradient-to-b from-indigo-50 via-white to-slate-100 text-slate-900"
+
+For normal applications, avoid very strong gradients behind tables/forms. Use a subtle gradient on the page and put content inside cards.
