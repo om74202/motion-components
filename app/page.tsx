@@ -6,12 +6,23 @@ import { ScrollPage } from "@/components/scrollPage/Page";
 import { ScrollProgressBar } from "@/components/scrolls/ScrollProgressBars";
 import { ThreeDotsLoader } from "@/loaders/ThreeDots";
 import { useState } from "react";
+import {Mojito} from "@/components/HeroSections/Mojito"
+import { MojitoNavbar } from "@/components/HeroSections/MojitoNavbar";
+import { About } from "@/components/HeroSections/About";
+import Cocktails from "@/components/HeroSections/Cocktails";
+import Contact from "@/components/HeroSections/Contact"
 
 
 export default function Home() {
   return (
-    <div className="">
-      <GsapTo/>
-    </div>
+    <main>
+      <div className="relative min-h-screen overflow-hidden">
+        <MojitoNavbar />
+        <Mojito />
+        <Cocktails />
+        <About />
+        <Contact/>
+      </div>
+    </main>
   );
 }
