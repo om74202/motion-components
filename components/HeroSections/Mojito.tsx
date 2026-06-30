@@ -64,57 +64,135 @@ export const Mojito = () => {
         .to(".right-leaf", { y: 200 }, 0)
         .to(".left-leaf", { y: -200 }, 0);
 
-      const video = videoRef.current;
+    const video = videoRef.current;
+    const videoZone = document.querySelector("#mojito-video-zone");
 
-      let videoTl: gsap.core.Timeline | undefined;
-      let removeLoadedMetadataListener: (() => void) | undefined;
+    let videoTl: gsap.core.Timeline | undefined;
+    let videoVisibilityTrigger: ScrollTrigger | undefined;
+    let removeLoadedMetadataListener: (() => void) | undefined;
 
-      if (video) {
+    if (video && videoZone) {
+      video.pause();
+      video.currentTime = 0;
+
+     const bottomOffset = 0;
+
+     const setVideoFixedCenter = () => {
+       gsap.set(video, {
+         position: "fixed",
+         autoAlpha: 1,
+         left: "50%",
+         top: "50%",
+         xPercent: -50,
+         yPercent: -50,
+       });
+     };
+
+     const setVideoAbsoluteAtSectionBottom = () => {
+       const videoZoneHeight = (videoZone as HTMLElement).offsetHeight;
+       const videoHeight = video.offsetHeight;
+
+       gsap.set(video, {
+         position: "absolute",
+         autoAlpha: 1,
+         left: "50%",
+         top: videoZoneHeight - videoHeight - bottomOffset,
+         xPercent: -50,
+         yPercent: 0,
+       });
+     };
+
+     gsap.set(video, {
+       position: "fixed",
+       autoAlpha: 0,
+       left: "50%",
+       top: "50%",
+       xPercent: -50,
+       yPercent: -50,
+     });
+
+     videoVisibilityTrigger = ScrollTrigger.create({
+       trigger: videoZone,
+
+       // video appears when mojito-video-zone enters
+       start: "top bottom",
+
+       // video becomes absolute at the bottom of mojito-video-zone
+       end: "bottom 87%",
+
+       markers: true,
+
+       onEnter: () => {
+         setVideoFixedCenter();
+       },
+
+       onEnterBack: () => {
+         setVideoFixedCenter();
+       },
+
+       onLeave: () => {
+         setVideoAbsoluteAtSectionBottom();
+       },
+
+       onLeaveBack: () => {
+         gsap.set(video, {
+           autoAlpha: 0,
+           position: "fixed",
+         });
+       },
+
+       onRefresh: (self) => {
+         if (self.progress >= 1) {
+           setVideoAbsoluteAtSectionBottom();
+         }
+       },
+     });
+      const setupVideoScrub = () => {
+        if (!Number.isFinite(video.duration) || video.duration <= 0) return;
+
         video.pause();
         video.currentTime = 0;
 
-        const setupVideoScrub = () => {
-          if (!Number.isFinite(video.duration) || video.duration <= 0) return;
+        videoTl?.kill();
 
-          video.pause();
-          video.currentTime = 0;
+        videoTl = gsap.timeline({
+          scrollTrigger: {
+            trigger: videoZone,
+            start: "top top",
+            end: "bottom bottom",
+            scrub: 0.2,
+            invalidateOnRefresh: true,
+          },
+        });
 
-          videoTl?.kill();
+        videoTl.to(video, {
+          currentTime: video.duration,
+          ease: "none",
+        });
 
-          videoTl = gsap.timeline({
-            scrollTrigger: {
-              trigger: "#hero",
-              start: "top top",
-              end: "bottom bottom",
-              scrub: 0.2,
-            },
-          });
+        ScrollTrigger.refresh();
+      };
 
-          videoTl.to(video, {
-            currentTime: video.duration,
-            ease: "none",
-          });
+      if (Number.isFinite(video.duration) && video.duration > 0) {
+        setupVideoScrub();
+      } else {
+        const handleLoadedMetadata = () => {
+          setupVideoScrub();
         };
 
-        if (Number.isFinite(video.duration) && video.duration > 0) {
-          setupVideoScrub();
-        } else {
-          const handleLoadedMetadata = () => {
-            setupVideoScrub();
-          };
+        video.addEventListener("loadedmetadata", handleLoadedMetadata, {
+          once: true,
+        });
 
-          video.addEventListener("loadedmetadata", handleLoadedMetadata, {
-            once: true,
-          });
-
-          removeLoadedMetadataListener = () => {
-            video.removeEventListener("loadedmetadata", handleLoadedMetadata);
-          };
-        }
+        removeLoadedMetadataListener = () => {
+          video.removeEventListener("loadedmetadata", handleLoadedMetadata);
+        };
       }
+    }
 
       return () => {
         removeLoadedMetadataListener?.();
+        videoVisibilityTrigger?.kill();
         videoTl?.kill();
         heroSplit.revert();
         paragraphSplit.revert();
@@ -133,7 +211,7 @@ export const Mojito = () => {
     >
       <video
         ref={videoRef}
-        className="hero-video pointer-events-none fixed left-1/2 top-1/2 z-0 h-[70vh] w-[50vw] -translate-x-1/2 -translate-y-1/2 rounded-3xl object-cover mix-blend-screen brightness-75 contrast-150 [will-change:transform]"
+        className="hero-video pointer-events-none fixed z-0 h-[70vh] w-[50vw] rounded-3xl object-cover mix-blend-screen brightness-75 contrast-150 [will-change:transform]"
         src="/videos/output.mp4"
         muted
         playsInline
@@ -186,9 +264,6 @@ export const Mojito = () => {
           </div>
         </div>
       </section>
-
-    
-    
     </section>
   );
 };

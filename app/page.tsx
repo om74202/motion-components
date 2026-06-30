@@ -18,10 +18,14 @@ export default function Home() {
     <main>
       <div className="relative min-h-screen overflow-hidden">
         <MojitoNavbar />
-        <Mojito />
-        <Cocktails />
+
+        <section id="mojito-video-zone" className="relative">
+          <Mojito />
+          <Cocktails />
+        </section>
+
         <About />
-        <Contact/>
+        <Contact />
       </div>
     </main>
   );
